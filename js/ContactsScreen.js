@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, Button, StyleSheet, Text, View } from 'react-native';
+import { FlatList, TouchableOpacity, Button, StyleSheet, Text, View, Image } from 'react-native';
 import Contacts from 'react-native-contacts';
 import Permissions from 'react-native-permissions';
 
@@ -92,14 +92,19 @@ export default class ContactsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 10,
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
   contactListItem: {
     minHeight: 30,
-  }
+  },
+  img: {
+    width: 25,
+    height: 25,
+  },
 });
 
 class ContactListItem extends React.PureComponent {
@@ -107,8 +112,9 @@ class ContactListItem extends React.PureComponent {
     this.props.onPressItem(this.props.id);
   };
   render() {
-    const textColor = this.props.selected ? "red" : "black";
-    const {familyName, givenName, middleName, selected} = this.props;
+    const {familyName, givenName, middleName, selected, thumbnailPath } = this.props;
+    const textColor = selected ? "red" : "black";
+
     let displayName = givenName;
     if (middleName !== givenName) {
       displayName += middleName ? ' ' + middleName : '';
@@ -153,6 +159,7 @@ class ContactsList extends React.PureComponent {
       familyName={item.familyName}
       givenName={item.givenName}
       middleName={item.middleName}
+      thumbnailPath={item.thumbnailPath}
     />
   );
 
