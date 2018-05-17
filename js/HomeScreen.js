@@ -34,23 +34,10 @@ export default class HomeScreen extends React.Component {
       console.log(e);
       this.setState({ message: 'State failed to load' + JSON.stringify(loadState) });
     }
-    Permissions.check('contacts').then(response => {
-      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-      this.setState({ permissions: response })
-    })
   }
 
   componentWillUnmount() {
   }
-
-  // Request permission to access photos
-  _requestPermission = () => {
-    Permissions.request('contacts').then(response => {
-      // Returns once the user has chosen to 'allow' or to 'not allow' access
-      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-      this.setState({ permissions: response })
-    })
-  };
 
   render() {
     let { message, permissions, buttonPresses } = this.state;
@@ -99,8 +86,19 @@ export default class HomeScreen extends React.Component {
     this.props.navigation.navigate('Contacts', {
       itemId: 66,
       otherParam: "Whatever mate",
+      permissions: this.state.permissions,
+      requestPermissions: this.requestContactsPermission,
     });
   };
+
+  requestContactsPermission = () => {
+    Permissions.request('contacts').then(response => {
+      // Returns once the user has chosen to 'allow' or to 'not allow' access
+      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+      this.setState({ permissions: response })
+    })
+  };
+
   getContacts = () => {
     this.setState({ message: 'Attempting contacts....' });
     Contacts.getAll((err, contacts) => {
