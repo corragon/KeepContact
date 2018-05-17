@@ -1,9 +1,10 @@
 import React from 'react';
-import { AsyncStorage, StyleSheet, Text, View, Button } from 'react-native';
+import { AsyncStorage, Button, StyleSheet, Text, View } from 'react-native';
 import Permissions from 'react-native-permissions';
 import PushNotification from 'react-native-push-notification';
 import Contacts from 'react-native-contacts';
 import { createStackNavigator } from 'react-navigation';
+import ContactsScreen from './ContactsScreen';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -84,8 +85,8 @@ class HomeScreen extends React.Component {
           title="Cancel scheduled notification"
           style={styles.button}/>
         <Button
-          title="Go to Details"
-          onPress={this.goToDetails}
+          title="Go to Contacts"
+          onPress={this.goToContacts}
         />
       </View>
     );
@@ -94,8 +95,8 @@ class HomeScreen extends React.Component {
   /**
    * METHODS
    */
-  goToDetails = () => {
-    this.props.navigation.navigate('Details', {
+  goToContacts = () => {
+    this.props.navigation.navigate('Contacts', {
       itemId: 66,
       otherParam: "Whatever mate",
     });
@@ -195,43 +196,10 @@ const styles = StyleSheet.create({
 });
 
 
-class DetailsScreen extends React.Component {
-  render() {
-    const {navigation} = this.props;
-    const itemId = navigation.getParam('itemId', 'NO-ID');
-    const otherParam = navigation.getParam('otherParam', 'default other param value');
-
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Text>itemId: {JSON.stringify(itemId)}</Text>
-        <Text>otherParam: {JSON.stringify(otherParam)}</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() =>
-            this.props.navigation.push('Details', {
-              itemId: Math.floor(Math.random() * 100),
-            })}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
-  }
-}
-
-
-
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: DetailsScreen,
+    Contacts: ContactsScreen,
   },
   {
     initalRouteName: 'Home',
