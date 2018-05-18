@@ -113,7 +113,7 @@ class ContactListItem extends React.PureComponent {
   };
   render() {
     const {familyName, givenName, middleName, selected, thumbnailPath } = this.props;
-    const textColor = selected ? "red" : "black";
+    const bgColor = selected ? "#dde" : "#fff";
 
     let displayName = givenName;
     if (middleName !== givenName) {
@@ -125,13 +125,11 @@ class ContactListItem extends React.PureComponent {
 
     return (
       <TouchableOpacity onPress={this._onPress}>
-        <View style={styles.contactListItem}>
-          <Text style={{ color: textColor }}>
-            {displayName}
-          </Text>
-          {selected ? <Text style={{ color: textColor }}>Given: {givenName}</Text> : null}
-          {selected ? <Text style={{ color: textColor }}>Middle: {middleName}</Text> : null}
-          {selected ? <Text style={{ color: textColor }}>Last: {familyName}</Text> : null}
+        <View style={[styles.contactListItem, {backgroundColor:bgColor}]}>
+          <Text>{displayName}</Text>
+          {selected ? <Text>Given: {givenName}</Text> : null}
+          {selected ? <Text>Middle: {middleName}</Text> : null}
+          {selected ? <Text>Last: {familyName}</Text> : null}
         </View>
       </TouchableOpacity>
     );
@@ -165,12 +163,15 @@ class ContactsList extends React.PureComponent {
 
   render() {
     return (
-      <FlatList
-        data={this.props.data}
-        extraData={this.state}
-        keyExtractor={this._keyExtractor}
-        renderItem={this._renderItem}
-      />
+      <View>
+        <Text>{JSON.stringify(this.state.selected)}</Text>
+        <FlatList
+          data={this.props.data}
+          extraData={this.state}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
+      </View>
     )
   }
 }
