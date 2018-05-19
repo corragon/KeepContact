@@ -3,8 +3,9 @@ import React from 'react';
 import Permissions from 'react-native-permissions';
 import PushNotification from 'react-native-push-notification';
 import Contacts from 'react-native-contacts';
+import { withLogger } from './Logger';
 
-export default class HomeScreen extends React.Component {
+class _HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
   };
@@ -41,10 +42,12 @@ export default class HomeScreen extends React.Component {
 
   render() {
     let { message, permissions, buttonPresses } = this.state;
+    let { logs } = this.props;
     return (
       <View style={styles.container}>
         <Text>{message}</Text>
         <Text>{permissions}</Text>
+        <Text>{logs[logs.length-1] || 'No logs'}</Text>
         <Text>Button pressed {buttonPresses} times</Text>
         <Button
           onPress={this.testMethod}
@@ -177,6 +180,8 @@ export default class HomeScreen extends React.Component {
     });
   };
 }
+
+export default HomeScreen = withLogger(_HomeScreen);
 
 const styles = StyleSheet.create({
   container: {
