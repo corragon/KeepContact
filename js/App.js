@@ -2,7 +2,6 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import ContactsScreen from './ContactsScreen';
 import HomeScreen from './HomeScreen';
-import Logger from './Logger';
 import { AsyncStorage } from 'react-native';
 
 
@@ -52,9 +51,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Logger>
         <RootStack selectedContacts={this.state.selectedContacts}/>
-      </Logger>
     );
   }
 }

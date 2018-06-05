@@ -42,12 +42,10 @@ class _HomeScreen extends React.Component {
 
   render() {
     let { message, permissions, buttonPresses } = this.state;
-    let { logs } = this.props;
     return (
       <View style={styles.container}>
         <Text>{message}</Text>
         <Text>{permissions}</Text>
-        <Text>{logs[logs.length-1] || 'No logs'}</Text>
         <Text>Button pressed {buttonPresses} times</Text>
         <Button
           onPress={this.testMethod}
