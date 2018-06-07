@@ -4,6 +4,10 @@ import ContactsScreen from './ContactsScreen';
 import HomeScreen from './HomeScreen';
 import { AsyncStorage } from 'react-native';
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+
+import { persistor, store } from './store';
 
 const RootStack = createStackNavigator(
   {
@@ -51,7 +55,11 @@ export default class App extends React.Component {
 
   render() {
     return (
-        <RootStack selectedContacts={this.state.selectedContacts}/>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RootStack selectedContacts={this.state.selectedContacts}/>
+        </PersistGate>
+      </Provider>
     );
   }
 }

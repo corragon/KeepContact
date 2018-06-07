@@ -3,9 +3,13 @@ import React from 'react';
 import Permissions from 'react-native-permissions';
 import PushNotification from 'react-native-push-notification';
 import Contacts from 'react-native-contacts';
-import { withLogger } from './Logger';
 
-class _HomeScreen extends React.Component {
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from './actions';
+
+class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
   };
@@ -42,10 +46,12 @@ class _HomeScreen extends React.Component {
 
   render() {
     let { message, permissions, buttonPresses } = this.state;
+    let { testMessage } = this.props;
     return (
       <View style={styles.container}>
         <Text>{message}</Text>
         <Text>{permissions}</Text>
+        <Text>{testMessage || 'Nothing'}</Text>
         <Text>Button pressed {buttonPresses} times</Text>
         <Button
           onPress={this.testMethod}
@@ -179,7 +185,18 @@ class _HomeScreen extends React.Component {
   };
 }
 
-export default HomeScreen = withLogger(_HomeScreen);
+function mapStatetoProps(state, props) {
+  return {
+    people: state.people,
+    testMessage: state.testMessage,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {

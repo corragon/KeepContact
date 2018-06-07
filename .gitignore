@@ -13,3 +13,6 @@
 .env.production.local
 
 .idea
+
+#android
+/android/app/build
