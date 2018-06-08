@@ -47,7 +47,6 @@ class HomeScreen extends React.Component {
   render() {
     let { message, permissions, buttonPresses } = this.state;
     let { testMessage } = this.props;
-    const color = this.selectedColor();
     return (
       <View style={styles.container}>
         <Text>{message}</Text>
@@ -90,13 +89,6 @@ class HomeScreen extends React.Component {
   /**
    * METHODS
    */
-  onChooseColor = () => {
-
-  };
-  selectedColor = () => {
-    const colorName = "RED";
-    return COLORS[colorName].hexCode;
-  };
 
   goToContacts = () => {
     this.props.navigation.navigate('Contacts', {
