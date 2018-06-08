@@ -13,3 +13,9 @@ export function deletePerson(person) {
     person,
   };
 }
+
+export function test() {
+  return {
+    type: 'TEST',
+  };
+}

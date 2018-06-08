@@ -46,12 +46,16 @@ class HomeScreen extends React.Component {
 
   render() {
     let { message, permissions, buttonPresses } = this.state;
-    let { testMessage } = this.props;
+
     return (
       <View style={styles.container}>
         <Text>{message}</Text>
         <Text>{permissions}</Text>
-        <Text>{testMessage || 'Nothing'}</Text>
+        <Text>{this.props.testMessage || 'How does this work'}</Text>
+        <Button
+          onPress={this.props.test}
+          title="test redux"
+          style={styles.button}/>
         <Text>Button pressed {buttonPresses} times</Text>
         <Button
           onPress={this.testMethod}
@@ -188,8 +192,7 @@ class HomeScreen extends React.Component {
 
 function mapStatetoProps(state, props) {
   return {
-    people: state.people,
-    testMessage: state.testMessage,
+    testMessage: state.people.testMessage,
   }
 }
 
