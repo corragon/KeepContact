@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import main from './main';
+import dummy from './dummyReducer';
 
 module.exports = rootReducer = combineReducers({
-  main
+  dummy
 });

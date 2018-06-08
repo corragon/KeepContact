@@ -8,7 +8,6 @@ import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 
 import * as Actions from '../actions/actions';
-import { COLORS } from '../store/colors';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -51,11 +50,6 @@ class HomeScreen extends React.Component {
     const color = this.selectedColor();
     return (
       <View style={styles.container}>
-        <View style={{width:50, height:50, backgroundColor: color}}/>
-        <Button
-          title="Choose color"
-          onPress={this.onChooseColor}
-        />
         <Text>{message}</Text>
         <Text>{permissions}</Text>
         <Text>{testMessage || 'Nothing'}</Text>
