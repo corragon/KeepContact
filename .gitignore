@@ -16,3 +16,5 @@
 
 #android
 /android/app/build
+/android/.gradle
+/android/build
