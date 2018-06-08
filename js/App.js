@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import ContactsScreen from './ContactsScreen';
-import HomeScreen from './HomeScreen';
+import ContactsScreen from './components/ContactsScreen';
+import HomeScreen from './components/HomeScreen';
 import { AsyncStorage } from 'react-native';
 
 import { Provider } from 'react-redux';

@@ -1,4 +1,4 @@
-import { ADD_PERSON, DELETE_PERSON } from './constants';
+import { ADD_PERSON, DELETE_PERSON } from '../constants';
 
 export function addPerson(person) {
   return {
