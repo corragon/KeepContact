@@ -1,9 +1,10 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, Button, StyleSheet, Text, View, Image } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import Contacts from 'react-native-contacts';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import { connect } from 'react-redux';
+import ContactsList from './ContactsList';
 
 class ContactsScreen extends React.Component {
   constructor(props) {
@@ -110,81 +111,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'stretch',
     justifyContent: 'center',
-  },
-  contactListItem: {
-    minHeight: 30,
-  },
-  img: {
-    width: 25,
-    height: 25,
-  },
+  }
 });
-
-class ContactListItem extends React.PureComponent {
-  _onPress = () => {
-    this.props.onPressItem(this.props.id);
-  };
-  render() {
-    const {familyName, givenName, middleName, selected, thumbnailPath } = this.props;
-    const bgColor = selected ? "#dde" : "#fff";
-
-    let displayName = givenName;
-    if (middleName !== givenName) {
-      displayName += middleName ? ' ' + middleName : '';
-    }
-    if (familyName !== givenName && familyName !== middleName) {
-      displayName += ' ' + (familyName||'');
-    }
-
-    return (
-      <TouchableOpacity onPress={this._onPress}>
-        <View style={[styles.contactListItem, {backgroundColor:bgColor}]}>
-          <Text>{displayName}</Text>
-          {selected ? <Text>Given: {givenName}</Text> : null}
-          {selected ? <Text>Middle: {middleName}</Text> : null}
-          {selected ? <Text>Last: {familyName}</Text> : null}
-        </View>
-      </TouchableOpacity>
-    );
-  }
-}
-
-class ContactsList extends React.PureComponent {
-  state = { selected: new Map()};
-
-  _keyExtractor = (item, index) => item.recordID;
-
-  _onPressItem = (id) => {
-    this.setState((state) => {
-      const selected = new Map(state.selected);
-      selected.set(id, !selected.get(id));
-      return {selected};
-    })
-  };
-
-  _renderItem = ({item}) => (
-    <ContactListItem
-      id={item.recordID}
-      onPressItem={this._onPressItem}
-      selected={!!this.state.selected.get(item.recordID)}
-      familyName={item.familyName}
-      givenName={item.givenName}
-      middleName={item.middleName}
-      thumbnailPath={item.thumbnailPath}
-    />
-  );
-
-  render() {
-    return (
-      <View>
-        <Text>{JSON.stringify(this.state.selected)}</Text>
-        <FlatList
-          data={this.props.data}
-          extraData={this.state}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderItem}
-        />
-      </View>
-    )
-  }
-}
