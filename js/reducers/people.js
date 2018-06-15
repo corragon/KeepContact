@@ -1,4 +1,4 @@
-import { ADD_PERSON, DELETE_PERSON } from '../actions/actions';
+import { ADD_PERSON, DELETE_PERSON } from '../actions/people';
 
 const defaultState = {
   people: ["What"],

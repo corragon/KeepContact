@@ -1,7 +1,7 @@
-import * as actions from './actions';
+import * as people from './people';
 import * as permissionActions from './permissions';
 
 module.exports = {
-  ...actions,
+  ...people,
   ...permissionActions,
 };
