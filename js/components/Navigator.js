@@ -14,12 +14,10 @@ export const Navigator = createStackNavigator(
   }
 );
 
-class Nav extends Component {
+export default class Nav extends Component {
   render() {
     return (
       <Navigator />
     )
   }
 }
-
-export default Nav;
