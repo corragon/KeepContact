@@ -1,9 +1,11 @@
 import React from 'react';
 import { FlatList, TouchableOpacity, Button, StyleSheet, Text, View, Image } from 'react-native';
 import Contacts from 'react-native-contacts';
-import Permissions from 'react-native-permissions';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
+import { connect } from 'react-redux';
 
-export default class ContactsScreen extends React.Component {
+class ContactsScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,7 +15,7 @@ export default class ContactsScreen extends React.Component {
     };
   }
   componentWillMount() {
-    let permissions = this.props.navigation.getParam('permissions');
+    let permissions = this.props.contactsPermisison;
     if (permissions === 'authorized') {
       Contacts.getAll((err, contacts) => {
         if (err) throw err;
@@ -33,7 +35,7 @@ export default class ContactsScreen extends React.Component {
     }
   }
   render() {
-    const permissions = this.props.navigation.getParam('permissions');
+    const permissions = this.props.contactsPermisison;
     const { navigation } = this.props;
     const itemId = navigation.getParam('itemId', 'NO-ID');
     const otherParam = navigation.getParam('otherParam', 'default other param value');
@@ -84,11 +86,22 @@ export default class ContactsScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>renderPermissionsRequest</Text>
-        <Text>Permission: {this.props.navigation.getParam('permissions')}</Text>
+        <Text>Permission: {this.props.contactsPermisison}</Text>
       </View>
     )
   };
 }
+
+function mapStateToProps(state, props) {
+  return {
+    contactsPermisison: state.permissions.contacts,
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactsScreen);
 
 const styles = StyleSheet.create({
   container: {

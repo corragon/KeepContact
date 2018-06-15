@@ -1,4 +1,4 @@
-import { AsyncStorage, StyleSheet, Button, Text, View } from 'react-native';
+import { StyleSheet, Button, Text, View } from 'react-native';
 import React from 'react';
 import Permissions from 'react-native-permissions';
 import PushNotification from 'react-native-push-notification';
@@ -7,7 +7,7 @@ import Contacts from 'react-native-contacts';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 
-import * as Actions from '../actions/actions';
+import * as Actions from '../actions';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -18,52 +18,26 @@ class HomeScreen extends React.Component {
     super(props);
     this.state = {
       message: 'This text changes',
-      permissions: 'Unknown',
-      buttonPresses: 0,
       notificationId: undefined,
     };
   }
 
-  // Check the status of a single permission
-  async componentDidMount() {
-    let loadState;
-    try {
-      loadState = await AsyncStorage.getItem('state');
-      if (loadState !== null) {
-        loadState = JSON.parse(loadState);
-        this.setState(loadState);
-        this.setState({ message: 'State loaded successfully' });
-      }
-    }
-    catch (e) {
-      console.log(e);
-      this.setState({ message: 'State failed to load' + JSON.stringify(loadState) });
-    }
-  }
-
-  componentWillUnmount() {
-  }
-
   render() {
-    let { message, permissions, buttonPresses } = this.state;
+    let { message } = this.state;
 
     return (
       <View style={styles.container}>
         <Text>{message}</Text>
-        <Text>{permissions}</Text>
         <Text>{this.props.testMessage || 'How does this work'}</Text>
         <Button
           onPress={this.props.test}
           title="test redux"
           style={styles.button}/>
-        <Text>Button pressed {buttonPresses} times</Text>
+        <Text>{this.props.contactsPermisison || 'contacts permission??'}</Text>
+
         <Button
-          onPress={this.testMethod}
-          title="Button"
-          style={styles.button}/>
-        <Button
-          onPress={this.saveState}
-          title="Save state"
+          onPress={this.props.requestContactsReadWrite}
+          title="Request contacts permission"
           style={styles.button}/>
         <Button
           onPress={this.getContacts}
@@ -124,23 +98,7 @@ class HomeScreen extends React.Component {
       }
     });
   };
-  testMethod = () => {
-    let { buttonPresses } = this.state;
-    buttonPresses += 1;
-    this.setState({
-      buttonPresses: buttonPresses,
-      message: `Button pressed ${buttonPresses} times`
-    });
-  };
-  saveState = async () => {
-    try {
-      await AsyncStorage.setItem('state', JSON.stringify(this.state));
-      this.setState({ message: 'State saved successfully' });
-    }
-    catch (e) {
-      this.setState({ message: 'State not saved: ' + e });
-    }
-  };
+
   sendNotification = () => {
     PushNotification.localNotification({
       /* Android Only Properties */
@@ -193,6 +151,7 @@ class HomeScreen extends React.Component {
 function mapStatetoProps(state, props) {
   return {
     testMessage: state.people.testMessage,
+    contactsPermisison: state.permissions.contacts,
   }
 }
 
