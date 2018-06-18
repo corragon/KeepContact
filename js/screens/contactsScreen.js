@@ -16,7 +16,7 @@ class ContactsScreen extends React.Component {
     };
   }
   componentWillMount() {
-    let permissions = this.props.contactsPermisison;
+    let permissions = this.props.contactsPermission;
     if (permissions === 'authorized') {
       Contacts.getAll((err, contacts) => {
         if (err) throw err;
@@ -36,7 +36,7 @@ class ContactsScreen extends React.Component {
     }
   }
   render() {
-    const permissions = this.props.contactsPermisison;
+    const permissions = this.props.contactsPermission;
     const { navigation } = this.props;
     const itemId = navigation.getParam('itemId', 'NO-ID');
     const otherParam = navigation.getParam('otherParam', 'default other param value');
@@ -87,7 +87,7 @@ class ContactsScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>renderPermissionsRequest</Text>
-        <Text>Permission: {this.props.contactsPermisison}</Text>
+        <Text>Permission: {this.props.contactsPermission}</Text>
       </View>
     )
   };
@@ -95,7 +95,7 @@ class ContactsScreen extends React.Component {
 
 function mapStateToProps(state, props) {
   return {
-    contactsPermisison: state.permissions.contacts,
+    contactsPermission: state.permissions.contacts,
   }
 }
 function mapDispatchToProps(dispatch) {
