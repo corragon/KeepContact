@@ -7,7 +7,7 @@ import Contacts from 'react-native-contacts';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 
-import * as Actions from '../actions';
+import * as Actions from '../actions/index';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {

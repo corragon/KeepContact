@@ -2,9 +2,9 @@ import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import Contacts from 'react-native-contacts';
 import { bindActionCreators } from 'redux';
-import * as Actions from '../actions';
+import * as Actions from '../actions/index';
 import { connect } from 'react-redux';
-import ContactsList from './ContactsList';
+import ContactsList from '../components/ContactsList';
 
 class ContactsScreen extends React.Component {
   constructor(props) {

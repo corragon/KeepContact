@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import ContactsScreen from './ContactsScreen';
+import ContactsScreen from '../screens/contactsScreen';
 import { createStackNavigator } from 'react-navigation';
-import HomeScreen from './HomeScreen';
+import HomeScreen from '../screens/homeScreen';
 
 export const Navigator = createStackNavigator(
   {
