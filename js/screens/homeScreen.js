@@ -41,7 +41,7 @@ class HomeScreen extends React.Component {
           style={styles.button}/>
         <Button
           onPress={this.getContacts}
-          title="Get a contact"
+          title="Get contacts count"
           style={styles.button}/>
         <Text>Notification buttons</Text>
         <Button
