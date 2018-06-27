@@ -4,6 +4,9 @@ import Contacts from 'react-native-contacts';
 import ContactsListContainer from '../containers/ContactsListContainer';
 
 export default class ContactsScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Contacts',
+  };
   constructor(props) {
     super(props);
 
