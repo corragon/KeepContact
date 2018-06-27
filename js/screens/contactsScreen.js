@@ -17,26 +17,11 @@ export default class ContactsScreen extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
-    const itemId = navigation.getParam('itemId', 'NO-ID');
-    const otherParam = navigation.getParam('otherParam', 'default other param value');
-
     return (
       <View style={styles.container}>
         <Text>Screen Msg: {this.state.message}</Text>
         <ContactsListContainer {...this.props}/>
-        {/*<ContactsList data={this.state.contacts}/>*/}
-        <Text>Contacts Screen</Text>
-        <Text>itemId: {JSON.stringify(itemId)}</Text>
-        <Text>otherParam: {JSON.stringify(otherParam)}</Text>
         <View style={styles.bottomRow}>
-          <Button
-            title="Go to Contacts... again"
-            onPress={() =>
-              this.props.navigation.push('Contacts', {
-                itemId: Math.floor(Math.random() * 100),
-              })}
-          />
           <Button
             title="Go to Home"
             onPress={() => this.props.navigation.navigate('Home')}
@@ -50,7 +35,6 @@ export default class ContactsScreen extends React.Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
