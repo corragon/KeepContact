@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
     contactsPermission: state.permissions.contacts,
   }

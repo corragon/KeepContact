@@ -20,7 +20,7 @@ export default class ContactsScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Screen Msg: {this.state.message}</Text>
-        <ContactsListContainer {...this.props}/>
+        <ContactsListContainer/>
         <View style={styles.bottomRow}>
           <Button
             title="Go to Home"
