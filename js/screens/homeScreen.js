@@ -60,6 +60,10 @@ class HomeScreen extends React.Component {
           title="Go to Contacts"
           onPress={this.goToContacts}
         />
+        <Button
+          title="Go to app contacts"
+          onPress={()=>{this.props.navigation.navigate('AppContacts')}}
+        />
       </View>
     );
   }
