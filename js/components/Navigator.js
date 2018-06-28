@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import ContactsScreen from '../screens/contactsScreen';
+import PhoneContactsScreen from '../screens/phoneContactsScreen';
 import { createStackNavigator } from 'react-navigation';
 import HomeScreen from '../screens/homeScreen';
 
 export const Navigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Contacts: ContactsScreen,
+    Contacts: PhoneContactsScreen,
   },
   {
     initalRouteName: 'Home',

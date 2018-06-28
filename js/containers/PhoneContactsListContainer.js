@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactsList from '../components/ContactsList';
+import ContactsList from '../components/PhoneContactsList';
 
 import Contacts from 'react-native-contacts';
 import { StyleSheet, Text, View } from 'react-native';

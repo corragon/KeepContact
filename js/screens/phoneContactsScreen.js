@@ -1,11 +1,10 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import Contacts from 'react-native-contacts';
-import ContactsListContainer from '../containers/ContactsListContainer';
+import ContactsListContainer from '../containers/PhoneContactsListContainer';
 
-export default class ContactsScreen extends React.Component {
+export default class PhoneContactsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Contacts',
+    title: 'Select Phone Contacts',
   };
   constructor(props) {
     super(props);

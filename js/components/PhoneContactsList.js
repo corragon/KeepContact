@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactListItem from './ContactListItem';
+import ContactListItem from './PhoneContactListItem';
 import { FlatList, Text, View } from 'react-native';
 
 export default class ContactsList extends React.PureComponent {
